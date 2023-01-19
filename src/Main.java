@@ -1,7 +1,6 @@
 import javafx.application.Application;
-import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -15,7 +14,7 @@ public class Main extends Application {
         private int COLS = 7;
         private Button[][] buttons = new Button[ROWS][COLS];
 
-        Circle c1 = new Circle(3, 4);
+        Circle c1 = new Circle(1, 1);
 
         public static void main(String[] args) {
             launch(args);
@@ -29,6 +28,8 @@ public class Main extends Application {
                 for (int col = 0; col < COLS; col++) {
                     Button button = new Button();
                     button.setMinSize(50, 50);
+                    button.setMaxSize(50, 50);
+                    button.setPadding(new Insets(0));
                     root.add(button, col, row);
                     buttons[row][col] = button;
                 }
@@ -39,10 +40,10 @@ public class Main extends Application {
             final ImageView selectedImage = new ImageView();
             Image redCircle = new Image("red-circle.png");
             selectedImage.setImage(redCircle);
-            selectedImage.setFitHeight(50);
-            selectedImage.setFitWidth(50);
-            selectedImage.setX(c1.getX());
-            selectedImage.setY(c1.getY());
+            selectedImage.setFitHeight(45);
+            selectedImage.setFitWidth(45);
+
+            buttons[c1.getRow()][c1.getColumn()].setGraphic(selectedImage);
 
             root.getChildren().addAll(selectedImage);
             scene.setRoot(root);

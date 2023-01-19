@@ -1,28 +1,23 @@
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-
 public class Circle {
-    private int x, y;
+    private int column, row;
 
-    public Circle(int x, int y) {
-        this.x = x;
-        this.y = y;
-        convert();
+    public Circle(int column, int row) {
+        this.column = column-1;
+        this.row = 6-(row);
     }
 
     //Methods
     private void convert() {
-        x = (x*50)-25;
-        y = (y*50)-25;
+        column = (column *50)-25;
+        row = (row *50)-25;
     }
 
-    public int getX() {
-        return x;
+    public int getColumn() {
+        return column;
     }
 
-    public int getY() {
-        return y;
+    public int getRow() {
+        return row;
     }
     /*ublic void draw() {
         final int SIZE = 30;
