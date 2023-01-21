@@ -21,7 +21,8 @@ public class Main extends Application {
         final private int COLS = 7;
         final private Button[][] buttons = new Button[ROWS][COLS];
 
-        Circle c1 = new Circle(1, 1);
+        Circle c1 = new Circle("red",1, 1);
+        Circle c2 = new Circle("blue", 1,2);
 
         public static void main(String[] args) {
             launch(args);
@@ -50,15 +51,10 @@ public class Main extends Application {
             Scene scene2 = new Scene(root2);
             Canvas canvas = new Canvas(500,200);
 
-            final ImageView selectedImage = new ImageView();
-            Image redCircle = new Image("red-circle.png");
-            selectedImage.setImage(redCircle);
-            selectedImage.setFitHeight(45);
-            selectedImage.setFitWidth(45);
+            buttons[c1.getRow()][c1.getColumn()].setGraphic(c1.getImg());
+            buttons[c2.getRow()][c2.getColumn()].setGraphic(c2.getImg());
 
-            buttons[c1.getRow()][c1.getColumn()].setGraphic(selectedImage);
-
-            root.getChildren().add(selectedImage);
+            //root.getChildren().add(c1.draw());
             root2.getChildren().add(canvas);
             scene.setRoot(root);
             scene2.setRoot(root2);
@@ -66,10 +62,6 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             GraphicsContext pen = canvas.getGraphicsContext2D();
 
-            //
-            pen.setFill(Color.BLUE);
-            pen.fillRect(10,10,20,20);
-            //
             primaryStage.setTitle("Connect 4 Assistant");
             primaryStage.show();
             primaryStage.setMinHeight(325);
@@ -82,4 +74,7 @@ public class Main extends Application {
         public void setBoardTile(int[][] boardTile) {
             this.boardTile = boardTile;
         }
+
+        //methods
+
     };
