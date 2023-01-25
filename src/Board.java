@@ -4,8 +4,8 @@ public class Board {
     //Attributes
     final private int ROWS = 6;
     final private int COLS = 7;
-    GridPane root;
-    private Slot[][] slot;
+    private GridPane root;
+    final private Slot[][] slot;
 
     //Constructor
     public Board(){
@@ -25,7 +25,7 @@ public class Board {
     }
 
     public void insertCircle(String type, int row, int col) {
-         slot[6-(row)][col-1].createCircle(type);
+         slot[ROWS-(row)][col-1].createCircle(type);
     }
 
     //Getters and Setters

@@ -26,4 +26,12 @@ public class Slot {
 
     //Getters and Setters
     public Button getButton() {return button;}
+
+    public int getWIDTH() {
+        return WIDTH;
+    }
+
+    public int getHEIGHT() {
+        return HEIGHT;
+    }
 }
