@@ -1,16 +1,15 @@
 import org.junit.Test;
 
-
 public class CircleTest {
     @Test
-    void getColumn() {
+    public void getColumn() {
         //Circle c = new Circle(5,0);
         //assertEquals(4, c.getColumn());
 // To DO
     }
 
     @Test
-    void getRow() {
+    public void getRow() {
 
     }
 }
