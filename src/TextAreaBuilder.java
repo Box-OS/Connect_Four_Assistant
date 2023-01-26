@@ -1,6 +1,14 @@
-import javafx.geometry.Pos;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Region;
-public class TextAreaBuilder {
 
+public abstract class TextAreaBuilder {
+    protected TextArea textArea;
+        public TextAreaBuilder(int width, int length) {
+            textArea = new TextArea();
+            textArea.setPrefRowCount(width);
+            textArea.setPrefColumnCount(length);
+        }
+
+    public TextArea getTextArea() {
+        return textArea;
+    }
 }

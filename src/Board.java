@@ -14,7 +14,7 @@ public class Board {
     }
 
     //Methods
-    public void createGrid(){
+    private void createGrid(){
         root = new GridPane();
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
@@ -22,6 +22,11 @@ public class Board {
                 root.add(slot[row][col].getButton(), col, row);
             }
         }
+    }
+
+    public void highlightSlot() {
+        //TODO: (Implement Core Programmer Algo) Optimal play is highlighted
+        slot[5][5].highlight();
     }
 
     public void insertCircle(String type, int row, int col) {
@@ -32,4 +37,6 @@ public class Board {
     public GridPane getRoot() {return root;}
     public int getROWS() {return ROWS;}
     public int getCOLS() {return COLS;}
+    public Slot[][] getSlot() {return slot;}
+
 }

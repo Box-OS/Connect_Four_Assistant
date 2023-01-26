@@ -21,8 +21,9 @@ public class Circle {
 
 
     //Methods
-    public void draw() {
+    private void draw() {
         img = new ImageView();
+        img.setSmooth(true);
         if (type.equals("red")) {
             img.setImage(redCircle);
         } else if (type.equals("blue")) {

@@ -24,13 +24,21 @@ public class Slot {
         button.setGraphic(circle.getImg());
     }
 
+    public void highlight() {
+        button.setStyle(
+               "-fx-outline:none;" +
+                "-fx-border-color:#9ecaed;" +
+               "-fx-box-shadow: inset 0 0 500px 500px #9ecaed;" +
+               "-fx-background-color: lightblue;"
+        );
+    }
+
+
     //Getters and Setters
     public Button getButton() {return button;}
-
     public int getWIDTH() {
         return WIDTH;
     }
-
     public int getHEIGHT() {
         return HEIGHT;
     }
