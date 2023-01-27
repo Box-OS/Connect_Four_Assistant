@@ -11,7 +11,8 @@ public class BoardHandler {
         // check for horizontal win
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 4; j++) {
-                if (rateLine(board[i][j], board[i][j + 1], board[i][j + 2], board[i][j + 3], userOrder) >= 1000) {
+                int lineScore = rateLine(board[i][j], board[i][j + 1], board[i][j + 2], board[i][j + 3], userOrder);
+                if (lineScore >= 1000 || lineScore <= -1000) {
                     return true;
                 }
             }
@@ -20,7 +21,8 @@ public class BoardHandler {
         // check for vertical win
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 7; j++) {
-                if (rateLine(board[i][j], board[i + 1][j], board[i + 2][j], board[i + 3][j], userOrder) >= 1000) {
+                int lineScore = rateLine(board[i][j], board[i + 1][j], board[i + 2][j], board[i + 3][j], userOrder);
+                if (lineScore >= 1000 || lineScore <= -1000) {
                     return true;
                 }
             }
@@ -29,7 +31,8 @@ public class BoardHandler {
         // check for diagonal win (top left to bottom right)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                if (rateLine(board[i][j], board[i + 1][j + 1], board[i + 2][j + 2], board[i + 3][j + 3], userOrder) >= 1000) {
+                int lineScore = rateLine(board[i][j], board[i + 1][j + 1], board[i + 2][j + 2], board[i + 3][j + 3], userOrder);
+                if (lineScore >= 1000 || lineScore <= -1000) {
                     return true;
                 }
             }
@@ -38,7 +41,8 @@ public class BoardHandler {
         // check for diagonal win (top right to bottom left)
         for (int i = 0; i < 3; i++) {
             for (int j = 3; j < 7; j++) {
-                if (rateLine(board[i][j], board[i + 1][j - 1], board[i + 2][j - 2], board[i + 3][j - 3], userOrder) >= 1000) {
+                int lineScore = rateLine(board[i][j], board[i + 1][j - 1], board[i + 2][j - 2], board[i + 3][j - 3], userOrder);
+                if (lineScore >= 1000 || lineScore <= -1000) {
                     return true;
                 }
             }
@@ -96,10 +100,13 @@ public class BoardHandler {
     public int rateLine(int a, int b, int c, int d, int userOrder) {
         int opponentOrder = (userOrder == 1) ? 2 : 1;
 
+        //puts input values into an array
         int[] line = new int[] {a, b, c, d};
 
+        //initializes rating value with 0
         int lineRating = 0;
 
+        //creates variables for pieces in a row for each party
         int userCount;
         int opponentCount;
 
@@ -122,7 +129,7 @@ public class BoardHandler {
 
         // check if opponent has winning line
         if (opponentCount == 4 && userCount == 0) {
-            lineRating += 1000;
+            lineRating -= 1000;
         } else if (opponentCount == 3 && userCount == 0) {
             lineRating -= 100;
         } else if (opponentCount == 2 && userCount == 0) {
@@ -152,7 +159,7 @@ public class BoardHandler {
             boolean flag = line[j] == player;
             while(flag && i + j <= line.length) {
                 try {
-                    flag = flag && line[j] == line[j+i];
+                    flag = line[j] == line[j+i];
                 } catch (ArrayIndexOutOfBoundsException ignored) {}
                 i++;
             }
