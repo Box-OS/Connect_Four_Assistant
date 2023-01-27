@@ -152,25 +152,27 @@ public class BoardHandler {
      * @return the amount of pieces that are in a row
      */
     public int pieceCounter(int[] line, int player) {
-        int i;
+        // Initialize the number of pieces in a row as 0
         int inRow = 0;
-        for (int j = 0; j<line.length; j++) {
-            i = 1;
+        for (int j = 0; j < line.length; j++) {
+            int i = 1;
+            // Check if the current piece belongs to the specified player
             boolean flag = line[j] == player;
-            while(flag && i + j <= line.length) {
+            // Iterate through the remaining pieces in the line
+            while (flag && i + j <= line.length) {
                 try {
-                    flag = line[j] == line[j+i];
+                    // Check if the next piece belongs to the specified player
+                    flag = line[j] == line[j + i];
                 } catch (ArrayIndexOutOfBoundsException ignored) {}
                 i++;
             }
-
-            inRow = i-1;
-
-            if (inRow>1) {
-                break;
+            // Update the number of pieces in a row
+            inRow = i - 1;
+            if (inRow > 1) {
+                break; // If there are more than one consecutive pieces belonging to the specified player, break the loop
             }
         }
-       return inRow;
+        return inRow;
     }
 
 
