@@ -11,17 +11,18 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    private UI ui;
 
 
         @Override
         public void start(Stage primaryStage) {
 
             //Main Scene
-            UI.initializeUI();
-            Scene mainScene = new Scene(UI.getRoot(), UI.getBoardCOLS() * 50, UI.getBoardROWS() * 50);
+            ui = new UI();
+            Scene mainScene = new Scene(ui.getRoot(), ui.getBoardCOLS() * 50, ui.getBoardROWS() * 50);
 
             //TODO: Start Menu Scene
-            Canvas canvas = new Canvas(UI.getBoardCOLS() * 100,200);
+            Canvas canvas = new Canvas(ui.getBoardCOLS() * 100,200);
             GraphicsContext pen = canvas.getGraphicsContext2D();
 
             Group root = new Group();
@@ -36,4 +37,8 @@ public class Main extends Application {
             primaryStage.setMinHeight(325);
             primaryStage.setMinWidth(600);
         }
+
+    public UI getUi() {
+        return ui;
+    }
 };

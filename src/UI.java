@@ -4,25 +4,42 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class UI {
-    //Attributes
     //Layouts
-    private static GridPane root = new GridPane();
-    private static Board board = new Board();
-    private static AnchorPane containerOffset = new AnchorPane();
-    private static HBox container = new HBox();
-    private static AnchorPane itemsOffset = new AnchorPane();
-    private static HBox control = new HBox();
-    private static AnchorPane controlOffset = new AnchorPane();
+    private GridPane root;
+    private Board board;
+    private AnchorPane containerOffset;
+    private HBox container;
+    private AnchorPane itemsOffset;
+    private HBox control;
+    private AnchorPane controlOffset;
     //Contents
-    private static Input input = new Input();
-    private static Output output = new Output();
-    private static TextBuilder t1 = new TextBuilder("Input:");
-    private static TextBuilder t2 = new TextBuilder("Output:");
-    private static ButtonBuilder btnIn = new ButtonBuilder("Enter", "input",75,25);
-    private static ButtonBuilder btnout = new ButtonBuilder("Help", "help",50,25);
+    private Input input;
+    private Output output;
+    private TextBuilder t1;
+    private TextBuilder t2;
+    private InputButton btnIn;
+    private HelpButton btnHelp;
 
     //Methods
-    public static void initializeUI() {
+    public UI() {
+        root = new GridPane();
+        board = new Board();
+        containerOffset = new AnchorPane();
+        container = new HBox();
+        itemsOffset = new AnchorPane();
+        control = new HBox();
+        controlOffset = new AnchorPane();
+
+        input = new Input();
+        output = new Output();
+        t1 = new TextBuilder("Input:");
+        t2 = new TextBuilder("Output:");
+        //btnIn = new ButtonBuilder("Enter", "input",75,25, this);
+        //btnOut = new ButtonBuilder("Help", "help",50,25, this);
+        btnIn = new InputButton(this);
+        btnHelp = new HelpButton();
+
+
         //Root Children
         root.add(board.getRoot(), 1, 0);
         root.add(containerOffset, 2, 0);
@@ -51,8 +68,8 @@ public class UI {
         container.setVisible(true);
 
         //controlOffset Children
-        controlOffset.getChildren().addAll(btnout.getButton());
-        setAnchor(btnout.getButton(), 0.0, 0.0);
+        controlOffset.getChildren().addAll(btnHelp.getButton());
+        setAnchor(btnHelp.getButton(), 0.0, 0.0);
 
     }
 
@@ -61,18 +78,18 @@ public class UI {
         AnchorPane.setLeftAnchor(node, left);
     }
 
-    public static GridPane getRoot() {
+    public GridPane getRoot() {
         return root;
     }
 
-    public static Board getBoard() {
+    public Board getBoard() {
         return board;
     }
 
-    public static int getBoardCOLS() {
+    public int getBoardCOLS() {
         return board.getCOLS();
     }
-    public static int getBoardROWS() {
+    public int getBoardROWS() {
         return board.getROWS();
     }
 }
