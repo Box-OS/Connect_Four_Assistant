@@ -5,14 +5,17 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
-
+/**  Main.class
+ *  Runs program and make scenes
+ *
+ *  @author Sina Akhavan
+ */
 public class Main extends Application {
     //TODO: Create a builder class for UI objects
     public static void main(String[] args) {
         launch(args);
     }
     private UI ui;
-
 
         @Override
         public void start(Stage primaryStage) {

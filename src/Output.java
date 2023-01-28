@@ -1,11 +1,22 @@
+/** HelpButton.java
+ *  Extends TextAreaBuilder.java
+ *  Implements an output interface using textarea
+ *
+ *  @author Sina Akhavan
+ */
 public class Output extends TextAreaBuilder{
 
     public Output() {
-        super(1,12);
+        super(3,12);
         textArea.setEditable(false);
+        textArea.setWrapText(true);
     }
 
-    public void setText(String string) {
-        textArea.setText(string);
+    public void addText(String string) {
+        if (!textArea.getText().isEmpty()) {
+            textArea.setText(textArea.getText() + "\n" + string);
+        } else {
+            textArea.setText(textArea.getText() + string);
+        }
     }
 }

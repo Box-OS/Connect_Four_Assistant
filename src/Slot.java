@@ -1,6 +1,11 @@
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 
+/** Circle.java
+ *  creates a slot capable of containing a circle
+ *
+ *   @author Sina Akhavan
+ */
 public class Slot {
     //Attributes
     final private int WIDTH = 50;

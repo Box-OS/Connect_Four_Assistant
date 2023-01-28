@@ -3,6 +3,11 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/** ButtonBuilder.java
+    *  Abstract class for making a blueprint of a button
+    *
+    *   @author Sina Akhavan
+    */
 public abstract class ButtonBuilder {
     protected Button button;
 

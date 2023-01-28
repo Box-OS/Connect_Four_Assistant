@@ -1,11 +1,18 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/** Circle.java
+ *  creates the playing tokens for player1 (red) and player2 (blue)
+ *
+ *   @author Sina Akhavan
+ */
 public class Circle {
     //Attributes
     private int height, width;
     private String type;
     private ImageView img;
+    Image redCircle = new Image("red-circle.png");
+    Image blueCircle = new Image("blue-circle.png");
 
     //Constructor
     public Circle(String type) {
@@ -14,11 +21,6 @@ public class Circle {
         width = 45;
         draw();
     }
-
-    //Objects
-    Image redCircle = new Image("red-circle.png");
-    Image blueCircle = new Image("blue-circle.png");
-
 
     //Methods
     private void draw() {

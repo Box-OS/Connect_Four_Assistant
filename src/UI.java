@@ -2,7 +2,11 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
+/** UI.java
+ *  Creates and places various ui elements
+ *
+ *   @author Sina Akhavan
+ */
 public class UI {
     //Layouts
     private GridPane root;
@@ -34,9 +38,7 @@ public class UI {
         output = new Output();
         t1 = new TextBuilder("Input:");
         t2 = new TextBuilder("Output:");
-        //btnIn = new ButtonBuilder("Enter", "input",75,25, this);
-        //btnOut = new ButtonBuilder("Help", "help",50,25, this);
-        btnIn = new InputButton(this);
+        btnIn = new InputButton(this, input, output);
         btnHelp = new HelpButton();
 
 
@@ -57,9 +59,9 @@ public class UI {
         //componentsOffset Children
         itemsOffset.getChildren().addAll(input.getTextArea(), t1.getTxt(), output.getTextArea(), t2.getTxt(), btnIn.getButton());
         setAnchor(t1.getTxt(), 0.0, 0.0);
-        setAnchor(input.getTextArea(), 30.0, 0.0);
-        setAnchor(t2.getTxt(), 120.0, 0.0);
-        setAnchor(output.getTextArea(), 150.0, 0.0);
+        setAnchor(input.getTextArea(), 25.0, 0.0);
+        setAnchor(t2.getTxt(), 95.0, 0.0);
+        setAnchor(output.getTextArea(), 120.0, 0.0);
         setAnchor(btnIn.getButton(), 0,105.0);
 
         //conrol Children
@@ -73,6 +75,12 @@ public class UI {
 
     }
 
+    /**
+     * Static method that simplifies setting anchor to top and bottom
+     * @param node The node that is being adjusted
+     * @param top distance from top to node
+     * @param left distance from left to node
+     */
     private static void setAnchor(Node node, double top, double left) {
         AnchorPane.setTopAnchor(node, top);
         AnchorPane.setLeftAnchor(node, left);

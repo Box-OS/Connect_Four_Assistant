@@ -1,6 +1,11 @@
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/** TextBuilder.java
+ *  creates and customizes text
+ *
+ *   @author Sina Akhavan
+ */
 public class TextBuilder {
     Text txt;
 

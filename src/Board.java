@@ -1,5 +1,10 @@
 import javafx.scene.layout.GridPane;
 
+/** Board.java
+ *  Creates a grid of slots
+ *
+ *   @author Sina Akhavan
+ */
 public class Board {
     //Attributes
     final private int ROWS = 6;
@@ -24,9 +29,8 @@ public class Board {
         }
     }
 
-    public void highlightSlot() {
-        //TODO: (Implement Core Programmer Algo) Optimal play is highlighted
-        slot[5][5].highlight();
+    public void highlightSlot(int col, int row) {
+        slot[ROWS-(row)][col-1].highlight();
     }
 
     public void insertCircle(String type, int row, int col) {
