@@ -1,9 +1,9 @@
 public class GravityHandler {
 
     public int[][] addPiece(int[][] board, int column, int player) {
-        for (int i = 0; i<6; i++) {
-            if (board[column][i] == 0) {
-                board[column][i] = player;
+        for (int i = 5; i>=0; i--) {
+            if (board[i][column] == 0) {
+                board[i][column] = player;
                 break;
             }
         }
