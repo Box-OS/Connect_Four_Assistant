@@ -32,7 +32,7 @@ public class Slot {
     public void highlight() {
         button.setStyle(
                "-fx-outline:none;" +
-                "-fx-border-color:#9ecaed;" +
+               "-fx-border-color:#9ecaed;" +
                "-fx-box-shadow: inset 0 0 500px 500px #9ecaed;" +
                "-fx-background-color: lightblue;"
         );

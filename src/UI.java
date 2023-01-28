@@ -23,6 +23,7 @@ public class UI {
     private TextBuilder t2;
     private InputButton btnIn;
     private HelpButton btnHelp;
+    private ReturnButton btnReturn;
 
     //Methods
     public UI() {
@@ -36,25 +37,27 @@ public class UI {
 
         input = new Input();
         output = new Output();
-        t1 = new TextBuilder("Input:");
-        t2 = new TextBuilder("Output:");
+        t1 = new TextBuilder("Input:", 16);
+        t2 = new TextBuilder("Output:", 16);
         btnIn = new InputButton(this, input, output);
         btnHelp = new HelpButton();
-
+        btnReturn = new ReturnButton();
 
         //Root Children
         root.add(board.getRoot(), 1, 0);
         root.add(containerOffset, 2, 0);
-        root.setGridLinesVisible(true);
+        root.setStyle(
+                "-fx-background-color: #C3DBC5;"
+        );
 
         //containerOffset Children
         containerOffset.getChildren().addAll(container, control);
         setAnchor(container, 20.0, 20.0);
-        setAnchor(control, 250, 20);
+        setAnchor(control, 260, 20);
 
         //container Children
         container.getChildren().addAll(itemsOffset);
-        container.setMinWidth(250);
+        container.setMinWidth(230);
 
         //componentsOffset Children
         itemsOffset.getChildren().addAll(input.getTextArea(), t1.getTxt(), output.getTextArea(), t2.getTxt(), btnIn.getButton());
@@ -66,12 +69,12 @@ public class UI {
 
         //conrol Children
         control.getChildren().addAll(controlOffset);
-        container.setMinWidth(250);
-        container.setVisible(true);
+        container.setMinWidth(230);
 
         //controlOffset Children
-        controlOffset.getChildren().addAll(btnHelp.getButton());
+        controlOffset.getChildren().addAll(btnHelp.getButton(), btnReturn.getButton());
         setAnchor(btnHelp.getButton(), 0.0, 0.0);
+        setAnchor(btnReturn.getButton(),0.0, 75.0);
 
     }
 

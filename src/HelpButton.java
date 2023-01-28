@@ -9,7 +9,7 @@ import javafx.event.EventHandler;
  */
 public class HelpButton extends ButtonBuilder{
     public HelpButton() {
-        super("Help",50,20);
+        super("Help",60,25);
 
         EventHandler<ActionEvent> helpPopup = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)

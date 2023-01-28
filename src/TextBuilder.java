@@ -9,10 +9,10 @@ import javafx.scene.text.Text;
 public class TextBuilder {
     Text txt;
 
-    public TextBuilder(String t) {
+    public TextBuilder(String t, int size) {
         txt = new Text();
         txt.setText(t);
-        txt.setFont(new Font(16));
+        txt.setFont(new Font(size));
     }
 
     public Text getTxt() {

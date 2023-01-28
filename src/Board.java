@@ -41,6 +41,4 @@ public class Board {
     public GridPane getRoot() {return root;}
     public int getROWS() {return ROWS;}
     public int getCOLS() {return COLS;}
-    public Slot[][] getSlot() {return slot;}
-
 }
