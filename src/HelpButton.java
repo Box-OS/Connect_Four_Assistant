@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 
 /** HelpButton.java
  *  Extends ButtonBuilder.java
@@ -10,12 +11,14 @@ import javafx.event.EventHandler;
 public class HelpButton extends ButtonBuilder{
     public HelpButton() {
         super("Help",60,25);
+        Alert alert;
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("*Insert accepted inputs*");
 
         EventHandler<ActionEvent> helpPopup = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                System.out.println("help");
-
+               alert.show();
             }
 
         };

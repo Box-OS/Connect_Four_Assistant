@@ -2,13 +2,14 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 public class StartMenu extends SceneBuilder{
-    public StartMenu() {
-        super(new MenuUI().getStack());
+    public StartMenu(StageBuilder stage) {
+        super(new MenuUI().getRoot());
+
         EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
             public void handle(MouseEvent e) {
-                //.setScene(getScene());
+                stage.switchScene(stage.getPlayScene().getScene());
             }
         };
-        scene.setOnMouseClicked(event);
+        scene.setOnMousePressed(event);
     }
 }

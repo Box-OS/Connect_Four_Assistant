@@ -1,3 +1,5 @@
-//public class ChoosePlayer extends SceneBuilder {
-    //super();
-//}
+public class ChoosePlayer extends SceneBuilder {
+    public ChoosePlayer() {
+        super(new MenuUI().getRoot());
+    }
+}

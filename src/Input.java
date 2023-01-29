@@ -6,7 +6,7 @@
  */
 public class Input extends TextAreaBuilder{
     public Input() {
-        super(1,12);
+        super(0,14);
         textArea.setWrapText(true);
     }
 

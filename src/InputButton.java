@@ -11,7 +11,7 @@ public class InputButton extends ButtonBuilder{
     boolean isYourTurn = true;
 
     public InputButton(UI ui, Input input, Output output) {
-        super("Enter", 75,20);
+        super("Enter", 60,20);
 
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)

@@ -7,7 +7,7 @@
 public class Output extends TextAreaBuilder{
 
     public Output() {
-        super(3,12);
+        super(4,14);
         textArea.setEditable(false);
         textArea.setWrapText(true);
     }

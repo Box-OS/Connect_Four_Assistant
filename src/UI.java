@@ -2,6 +2,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+
 /** UI.java
  *  Creates and places various ui elements
  *
@@ -23,10 +24,10 @@ public class UI {
     private TextBuilder t2;
     private InputButton btnIn;
     private HelpButton btnHelp;
-    private ReturnButton btnReturn;
+    private RestartButton btnReturn;
 
-    //Methods
-    public UI() {
+    //Constructor
+    public UI(StageBuilder parentStage) {
         root = new GridPane();
         board = new Board();
         containerOffset = new AnchorPane();
@@ -41,19 +42,17 @@ public class UI {
         t2 = new TextBuilder("Output:", 16);
         btnIn = new InputButton(this, input, output);
         btnHelp = new HelpButton();
-        btnReturn = new ReturnButton();
+        btnReturn = new RestartButton();
 
         //Root Children
         root.add(board.getRoot(), 1, 0);
         root.add(containerOffset, 2, 0);
-        root.setStyle(
-                "-fx-background-color: #C3DBC5;"
-        );
+        root.setStyle("-fx-background-color: #C3DBC5;");
 
         //containerOffset Children
         containerOffset.getChildren().addAll(container, control);
         setAnchor(container, 20.0, 20.0);
-        setAnchor(control, 260, 20);
+        setAnchor(control, 250, 20);
 
         //container Children
         container.getChildren().addAll(itemsOffset);
@@ -65,7 +64,7 @@ public class UI {
         setAnchor(input.getTextArea(), 25.0, 0.0);
         setAnchor(t2.getTxt(), 95.0, 0.0);
         setAnchor(output.getTextArea(), 120.0, 0.0);
-        setAnchor(btnIn.getButton(), 0,105.0);
+        setAnchor(btnIn.getButton(), 0,140.0);
 
         //conrol Children
         control.getChildren().addAll(controlOffset);
