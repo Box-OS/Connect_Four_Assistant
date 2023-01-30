@@ -23,6 +23,11 @@ public class BoardHandler extends GravityHandler{
             if (isValidMove(board, i)) {
                 // Make the move and get the new board state
                 int[][] newBoard = addPiece(board, i, USER);
+                //if move is winning, break and output move
+                if (checkForWin(newBoard)) {
+                    bestMove = i;
+                    break;
+                }
                 // Recursively call minimax with the new board state, remaining depth, and opposite player
                 int score = evalBoard(newBoard);
                 // If the current player is the maximizing player, updates the best score and move if necessary
@@ -133,7 +138,7 @@ public class BoardHandler extends GravityHandler{
         // check for horizontal win
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 4; j++) {
-                boolean flag = board[i][j] == board[i][j + 1] && board[i][j + 1] == board[i][j + 2] && board[i][j + 2] == board[i][j + 3];
+                boolean flag = board[i][j] == USER && board[i][j] == board[i][j + 1] && board[i][j + 1] == board[i][j + 2] && board[i][j + 2] == board[i][j + 3];
                 if (flag) {
                     return true;
                 }
@@ -143,7 +148,7 @@ public class BoardHandler extends GravityHandler{
         // check for vertical win
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 7; j++) {
-                boolean flag = board[i][j] == board[i + 1][j] && board[i + 1][j] == board[i + 2][j] && board[i + 2][j] == board[i + 3][j];
+                boolean flag = board[i][j] == USER && board[i][j] == board[i + 1][j] && board[i + 1][j] == board[i + 2][j] && board[i + 2][j] == board[i + 3][j];
                 if (flag) {
                     return true;
                 }
@@ -153,7 +158,7 @@ public class BoardHandler extends GravityHandler{
         // check for diagonal win (top left to bottom right)
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                boolean flag = board[i][j] == board[i + 1][j + 1] && board[i + 1][j + 1] == board[i + 2][j + 2] && board[i + 2][j + 2] == board[i + 3][j + 3];
+                boolean flag = board[i][j] == USER && board[i][j] == board[i + 1][j + 1] && board[i + 1][j + 1] == board[i + 2][j + 2] && board[i + 2][j + 2] == board[i + 3][j + 3];
                 if (flag) {
                     return true;
                 }
@@ -163,7 +168,7 @@ public class BoardHandler extends GravityHandler{
         // check for diagonal win (top right to bottom left)
         for (int i = 0; i < 3; i++) {
             for (int j = 3; j < 7; j++) {
-                boolean flag = board[i][j] == board[i + 1][j - 1] && board[i + 1][j - 1] == board[i + 2][j - 2] && board[i + 2][j - 2] == board[i + 3][j - 3];
+                boolean flag = board[i][j] == USER && board[i][j] == board[i + 1][j - 1] && board[i + 1][j - 1] == board[i + 2][j - 2] && board[i + 2][j - 2] == board[i + 3][j - 3];
                 if (flag) {
                     return true;
                 }
@@ -322,10 +327,10 @@ public class BoardHandler extends GravityHandler{
         int[][] board = {
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0},
-                {0,0,0,2,0,0,0},
-                {2,0,0,2,0,0,0},
-                {1,0,0,2,0,0,0},
-                {1,1,0,1,0,0,0}
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {1,0,2,0,0,0,0},
+                {1,2,1,0,0,0,0}
         };
         System.out.println(b.findBestMove(board));
     }
