@@ -10,7 +10,7 @@ import javafx.event.EventHandler;
 public class InputButton extends ButtonBuilder{
     boolean isYourTurn = true;
 
-    public InputButton(UI ui, Input input, Output output) {
+    public InputButton(PlayNodes playNodes, Input input, Output output) {
         super("Enter", 60,20);
 
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
@@ -26,16 +26,16 @@ public class InputButton extends ButtonBuilder{
 
 
                 if (input.getInputString().contains("1") && isYourTurn) {
-                    ui.getBoard().insertCircle("red", 1, 1);
+                    playNodes.getBoard().insertCircle("red", 1, 1);
                     output.addText("Red played in column 1");
                     output.addText("It's blue's turn now");
                     isYourTurn = false;
                 } else if (input.getInputString().contains("1") && !isYourTurn) {
                     output.clearText();
-                    ui.getBoard().insertCircle("blue", 2, 1);
+                    playNodes.getBoard().insertCircle("blue", 2, 1);
                     output.addText("blue played in column 1.");
                     output.addText("It's your turn now, c2 would be a good move");
-                    ui.getBoard().highlightSlot(2,1);
+                    playNodes.getBoard().highlightSlot(2,1);
                     isYourTurn = true;
                     }
                 /*

@@ -3,46 +3,31 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-/** UI.java
- *  Creates and places various ui elements
+/** PlayNodes.java
+ *  Makes the main UI
  *
  *   @author Sina Akhavan
  */
-public class UI {
-    //Layouts
+public class PlayNodes {
     private GridPane root;
     private Board board;
-    private AnchorPane containerOffset;
-    private HBox container;
-    private AnchorPane itemsOffset;
-    private HBox control;
-    private AnchorPane controlOffset;
-    //Contents
-    private Input input;
-    private Output output;
-    private TextBuilder t1;
-    private TextBuilder t2;
-    private InputButton btnIn;
-    private HelpButton btnHelp;
-    private RestartButton btnReturn;
 
-    //Constructor
-    public UI(StageBuilder parentStage) {
+    public PlayNodes() {
         root = new GridPane();
         board = new Board();
-        containerOffset = new AnchorPane();
-        container = new HBox();
-        itemsOffset = new AnchorPane();
-        control = new HBox();
-        controlOffset = new AnchorPane();
+        AnchorPane containerOffset = new AnchorPane();
+        HBox container = new HBox();
+        AnchorPane itemsOffset = new AnchorPane();
+        HBox control = new HBox();
+        AnchorPane controlOffset = new AnchorPane();
 
-        input = new Input();
-        output = new Output();
-        t1 = new TextBuilder("Input:", 16);
-        t2 = new TextBuilder("Output:", 16);
-        btnIn = new InputButton(this, input, output);
-        btnHelp = new HelpButton();
-        btnReturn = new RestartButton();
+        Input input = new Input();
+        Output output = new Output();
+        TextBuilder txtInput = new TextBuilder("Input:", 16);
+        TextBuilder txtOuput = new TextBuilder("Output:", 16);
+        InputButton btnIn = new InputButton(this, input, output);
+        HelpButton btnHelp = new HelpButton();
+        RestartButton btnReturn = new RestartButton();
 
         //Root Children
         root.add(board.getRoot(), 1, 0);
@@ -59,16 +44,15 @@ public class UI {
         container.setMinWidth(230);
 
         //componentsOffset Children
-        itemsOffset.getChildren().addAll(input.getTextArea(), t1.getTxt(), output.getTextArea(), t2.getTxt(), btnIn.getButton());
-        setAnchor(t1.getTxt(), 0.0, 0.0);
+        itemsOffset.getChildren().addAll(input.getTextArea(), txtInput.getText(), output.getTextArea(), txtOuput.getText(), btnIn.getButton());
+        setAnchor(txtInput.getText(), 0.0, 0.0);
         setAnchor(input.getTextArea(), 25.0, 0.0);
-        setAnchor(t2.getTxt(), 95.0, 0.0);
+        setAnchor(txtOuput.getText(), 95.0, 0.0);
         setAnchor(output.getTextArea(), 120.0, 0.0);
         setAnchor(btnIn.getButton(), 0,140.0);
 
         //conrol Children
         control.getChildren().addAll(controlOffset);
-        container.setMinWidth(230);
 
         //controlOffset Children
         controlOffset.getChildren().addAll(btnHelp.getButton(), btnReturn.getButton());
@@ -91,15 +75,7 @@ public class UI {
     public GridPane getRoot() {
         return root;
     }
-
     public Board getBoard() {
         return board;
-    }
-
-    public int getBoardCOLS() {
-        return board.getCOLS();
-    }
-    public int getBoardROWS() {
-        return board.getROWS();
     }
 }

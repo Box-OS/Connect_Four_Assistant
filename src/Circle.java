@@ -22,10 +22,17 @@ public class Circle {
         draw();
     }
 
+    public Circle(String type, int size) {
+        this.type = type;
+        height = size;
+        width = size;
+        draw();
+    }
+
     //Methods
     private void draw() {
         img = new ImageView();
-        img.setSmooth(true);
+        img.setPickOnBounds(true);
         if (type.equals("red")) {
             img.setImage(redCircle);
         } else if (type.equals("blue")) {
