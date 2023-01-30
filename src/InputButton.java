@@ -10,12 +10,12 @@ import javafx.event.EventHandler;
 public class InputButton extends ButtonBuilder{
     boolean isYourTurn = true;
 
-    public InputButton(PlayNodes playNodes, Input input, Output output) {
-        super("Enter", 60,20);
+    BoardHandler b = new BoardHandler();
 
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
+    public InputButton(UI ui, Input input, Output output) {
+        super("Enter", 75,20);
+
+        EventHandler<ActionEvent> event = e -> {
 
                 //TODO: Read comments (For Core Programmer)
                 /*
@@ -24,26 +24,30 @@ public class InputButton extends ButtonBuilder{
                 Here's a linear example of what that would look like without the implementation of the algorithm.
                 */
 
+            output.clearText();
 
-                if (input.getInputString().contains("1") && isYourTurn) {
-                    playNodes.getBoard().insertCircle("red", 1, 1);
-                    output.addText("Red played in column 1");
-                    output.addText("It's blue's turn now");
-                    isYourTurn = false;
-                } else if (input.getInputString().contains("1") && !isYourTurn) {
-                    output.clearText();
-                    playNodes.getBoard().insertCircle("blue", 2, 1);
-                    output.addText("blue played in column 1.");
-                    output.addText("It's your turn now, c2 would be a good move");
-                    playNodes.getBoard().highlightSlot(2,1);
-                    isYourTurn = true;
-                    }
-                /*
-                Make sure that the logic and algo is implemented in the specialized classes you created. Only use this
-                event to access those classes. That's all. Message me ASAP if you have a question or need me to implement
-                something.
-                 */
-            }
+            int in = Integer.parseInt(input.getInputString());
+            String currentColor = isYourTurn? "red":"blue";
+            b.dump();   //debugging
+            ui.getBoard().insertCircle(currentColor, b.lowestRow(in-1), in);
+            b.dump();   //debugging
+            b.placePiece(in-1, isYourTurn? 1:2);
+            b.dump();   //debugging
+
+            int nextMove = b.nextMove(isYourTurn?1:2) + 1;
+
+            output.addText(currentColor + " played in column " + in);
+            currentColor = !isYourTurn? "red":"blue";
+            output.addText("It's " + currentColor + "'s turn now");
+
+            output.addText("The current best move is column " + nextMove);
+            //for (int i = 1; i<7; i++) {
+            //    ui.getBoard().highlightSlot(nextMove,i);
+            //}
+            b.dump();   //debugging
+            input.clearText();
+            isYourTurn = !isYourTurn;
+
 
         };
 

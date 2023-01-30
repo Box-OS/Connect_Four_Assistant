@@ -34,7 +34,7 @@ public class Board {
     }
 
     public void insertCircle(String type, int row, int col) {
-         slot[ROWS-(row)][col-1].createCircle(type);
+         slot[row][col-1].createCircle(type);
     }
 
     //Getters and Setters
