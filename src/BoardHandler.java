@@ -1,9 +1,102 @@
 public class BoardHandler extends GravityHandler{
 
+    ;
+
     //int indicating the user's pieces
     private final int USER = 1;
     //int indicating the opponent's pieces
     private final int OPPONENT = 2;
+
+    private int[][] player1Board = {
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0}
+    };
+
+    private int[][] player2Board = {
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0}
+    };
+
+    public int lowestRow(int column) {
+        return findLowest(player1Board, column);
+    }
+
+    public void placePiece(int column, int player) {
+        player1Board = addPiece(player1Board, column, player);
+        player2Board = addPiece(player2Board, column, player==1?2:1);
+    }
+
+    public int nextMove(int boardSelection) {
+        int[][] tempBoard;
+        if (boardSelection == 2) {
+            tempBoard = player2Board;
+        } else {
+            tempBoard = player1Board;
+        }
+        return findBestMove(tempBoard);
+    }
+
+    public void dump() {
+        for (int i = 0; i<7; i++) {
+            System.out.print(player1Board[0][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player1Board[1][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player1Board[2][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player1Board[3][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player1Board[4][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player1Board[5][i]);
+        }
+        System.out.println("");
+        System.out.println("");
+
+        for (int i = 0; i<7; i++) {
+            System.out.print(player2Board[0][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player2Board[1][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player2Board[2][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player2Board[3][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player2Board[4][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(player2Board[5][i]);
+        }
+        System.out.println("");
+        System.out.println("");
+    }
 
     /**
      * Iterates through placing a piece in each column and calling upon evalBoard() to rate the position
@@ -11,37 +104,42 @@ public class BoardHandler extends GravityHandler{
      * @param board the game board being passed in
      * @return the column for the best move
      */
-    public int findBestMove(int[][] board) {
+    private int findBestMove(int[][] board) {
+
+
         // Initialize best move as an invalid move
         int bestMove = -1;
-        // Initialize best score based on player
-        int bestScore = true ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        // Initialize best score as the lowest possible value
+        int bestScore = Integer.MIN_VALUE;
 
         // Loop through all possible moves
         for (int i = 0; i < 7; i++) {
             // Check if the move is valid
             if (isValidMove(board, i)) {
+                int[][] newBoard;
                 // Make the move and get the new board state
-                int[][] newBoard = addPiece(board, i, USER);
+                newBoard = addPiece(board, i, USER);
                 //if move is winning, break and output move
                 if (checkForWin(newBoard)) {
                     bestMove = i;
                     break;
                 }
-                // Recursively call minimax with the new board state, remaining depth, and opposite player
+                //checks score of board
                 int score = evalBoard(newBoard);
-                // If the current player is the maximizing player, updates the best score and move if necessary
+                // If score of position is better than previous, update
                 if ( score > bestScore) {
                     bestScore = score;
                     bestMove = i;
                 }
             }
+
+
         }
         return bestMove;
     }
 
 /*
-    public int findBestMove(int[][] board, int depth, boolean isMaximizing) {
+    private int findBestMove(int[][] board, int depth, boolean isMaximizing) {
         // Initialize best move as an invalid move
         int bestMove = -1;
         // Initialize best score based on player
@@ -50,9 +148,9 @@ public class BoardHandler extends GravityHandler{
         // Loop through all possible moves
         for (int i = 0; i < 7; i++) {
             // Check if the move is valid
-            if (isValidMove(board, i)) {
+            if (g.isValidMove(board, i)) {
                 // Make the move and get the new board state
-                int[][] newBoard = addPiece(board, i, isMaximizing ? USER : OPPONENT);
+                int[][] newBoard = g.addPiece(board, i, isMaximizing ? USER : OPPONENT);
                 // Recursively call minimax with the new board state, remaining depth, and opposite player
                 int score = minimax(newBoard, depth - 1, !isMaximizing);
                 // If the current player is the maximizing player, updates the best score and move if necessary
@@ -69,10 +167,18 @@ public class BoardHandler extends GravityHandler{
         }
         return bestMove;
     }
- */
 
 
-    public int minimax(int[][] board, int depth, boolean isMaximizing) {
+
+    /**
+     * minimax
+     *
+     * @param board the board passed into the method
+     * @param depth indicates the maximum depth algorithm is to recurse
+     * @param isMaximizing determines which player we are helping
+     * @return an int representing the score of the position
+     */
+    private int minimax(int[][] board, int depth, boolean isMaximizing) {
         // Check if the game is over by calling checkForWin()
         if (checkForWin(board)) {
             // If the current player is the maximizing player, return a score of 10 to indicate a win
@@ -127,14 +233,13 @@ public class BoardHandler extends GravityHandler{
         }
         return bestScore;
     }
-
     /**
      * checks if there are 4 same-player pieces in a row and gives a true-or-false return
      *
      * @param board the game board in a 2D array
      * @return true if 4 pieces are in a row in any orientation
      */
-    public boolean checkForWin(int[][] board) {
+    private boolean checkForWin(int[][] board) {
         // check for horizontal win
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 4; j++) {
@@ -184,7 +289,7 @@ public class BoardHandler extends GravityHandler{
      * @param board the game board in a 2D array
      * @return a total board score based on rateLine's output of each set of 4 adjacent spots
      */
-    public int evalBoard(int[][] board) {
+    private int evalBoard(int[][] board) {
         int boardScore = 0;
         // check for horizontal lines
         for (int i = 0; i < 6; i++) {
@@ -234,7 +339,7 @@ public class BoardHandler extends GravityHandler{
      * @param d fourth piece in row
      * @return a score based on amount of user and opponent pieces in a row
      */
-    public int rateLine(int a, int b, int c, int d) {
+    private int rateLine(int a, int b, int c, int d) {
 
         //puts input values into an array
         int[] line = new int[] {a, b, c, d};
@@ -296,7 +401,7 @@ public class BoardHandler extends GravityHandler{
      * @param player indicates if method should check for player 1 (user) or player 2 (opponent)'s pieces
      * @return the amount of pieces that are in a row
      */
-    public int pieceCounter(int[] line, int player) {
+    private int pieceCounter(int[] line, int player) {
         // Initialize the number of pieces in a row as 0
         int inRow = 0;
         for (int j = 0; j < line.length; j++) {
@@ -329,10 +434,33 @@ public class BoardHandler extends GravityHandler{
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0},
-                {1,0,2,0,0,0,0},
-                {1,2,1,0,0,0,0}
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0}
         };
-        System.out.println(b.findBestMove(board));
+        b.findBestMove(board);
+        for (int i = 0; i<7; i++) {
+            System.out.print(board[0][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(board[1][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(board[2][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(board[3][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(board[4][i]);
+        }
+        System.out.println("");
+        for (int i = 0; i<7; i++) {
+            System.out.print(board[5][i]);
+        }
     }
 }
 
