@@ -7,38 +7,35 @@ import javafx.stage.Stage;
  *   @author Sina Akhavan
  */
 public class StageBuilder {
-    private Stage stage;
-    private MenuScene menuScene;
-    private PlayScene playScene;
-    private SelectPlayerScene selectPScene;
+    private final Stage STAGE;
+    private final MenuScene MENU_SCENE;
+    private final PlayScene PLAY_SCENE;
 
     public StageBuilder(String title) {
-        stage = new Stage();
-        menuScene = new MenuScene(this);
-        selectPScene = new SelectPlayerScene(this);
-        playScene = new PlayScene();
+        STAGE = new Stage();
+        MENU_SCENE = new MenuScene(this);
+        PLAY_SCENE = new PlayScene();
 
-        stage.setScene(menuScene.getScene());
-        stage.setTitle(title);
-        stage.show();
+        STAGE.setScene(MENU_SCENE.getScene());
+        STAGE.setTitle(title);
+        STAGE.show();
     }
 
     public void switchScene(Scene scene) {
-        stage.setScene(scene);
+        STAGE.setScene(scene);
     }
 
     public void closeStage() {
-        stage.close();
+        STAGE.close();
     }
 
-    public void setWindowSettings(int minY, int minX, boolean maxControl, boolean resizable) {
-        stage.setMinHeight(minY);
-        stage.setMinWidth(minX);
-        stage.setMaximized(maxControl);
-        stage.setResizable(resizable);
+    public void setWindowSettings(boolean maxControl, boolean resizable) {
+        STAGE.setMinHeight(PLAY_SCENE.getScene().getHeight());
+        STAGE.setMinWidth(PLAY_SCENE.getScene().getWidth());;
+        STAGE.setMaximized(maxControl);
+        STAGE.setResizable(resizable);
     }
 
-    public MenuScene getStartMenu() {return menuScene;}
-    public PlayScene getPlayScene() {return playScene;}
-    public SelectPlayerScene getSelectPScene() {return selectPScene;}
+    public MenuScene getStartMenu() {return MENU_SCENE;}
+    public PlayScene getPLAY_SCENE() {return PLAY_SCENE;}
 }

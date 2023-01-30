@@ -8,13 +8,9 @@ import javafx.scene.input.MouseEvent;
  */
 public class MenuScene extends SceneBuilder{
     public MenuScene(StageBuilder stage) {
-        super(new MenuUI().getRoot());
+        super(new MenuNodes(600, 325).getROOT());
 
-        EventHandler<MouseEvent> event = new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent e) {
-                stage.switchScene(stage.getSelectPScene().getScene());
-            }
-        };
+        EventHandler<MouseEvent> event = e -> stage.switchScene(stage.getPLAY_SCENE().getScene());
         scene.setOnMousePressed(event);
     }
 }

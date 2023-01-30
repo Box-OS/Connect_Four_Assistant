@@ -21,12 +21,11 @@ public class Main extends Application {
             private static void startGame() {
 
                 primaryStage = new StageBuilder("Connect 4 Assistant");
-                primaryStage.setWindowSettings(325, 600, false, false);
+                primaryStage.setWindowSettings(false, false);
             }
             public static void restartGame() {
                 primaryStage.closeStage();
                 startGame();
-
             }
 
         }

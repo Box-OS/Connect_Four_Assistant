@@ -7,14 +7,22 @@ import javafx.scene.text.Text;
  *   @author Sina Akhavan
  */
 public class TextBuilder {
-    Text text;
+    private final Text TEXT;
 
-    public TextBuilder(String t, int size) {
-        text = new Text();
-        text.setText(t);
-        text.setFont(new Font(size));
-        text.setMouseTransparent(true);
+
+
+    public TextBuilder(String t, int size, String font) {
+        TEXT = new Text();
+        TEXT.setText(t);
+        TEXT.setFont(Font.font(font));
+        TEXT.setFont(Font.font(size));
+
+        TEXT.setMouseTransparent(true);
     }
 
-    public Text getText() {return text;}
+    public TextBuilder(String t, int size) {
+        this(t, size, "SF Pro");
+    }
+
+    public Text getTEXT() {return TEXT;}
 }

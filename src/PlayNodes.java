@@ -9,12 +9,12 @@ import javafx.scene.layout.HBox;
  *   @author Sina Akhavan
  */
 public class PlayNodes {
-    private GridPane root;
-    private Board board;
+    private final GridPane ROOT;
+    private final Board BOARD;
 
     public PlayNodes() {
-        root = new GridPane();
-        board = new Board();
+        ROOT = new GridPane();
+        BOARD = new Board();
         AnchorPane containerOffset = new AnchorPane();
         HBox container = new HBox();
         AnchorPane itemsOffset = new AnchorPane();
@@ -24,15 +24,15 @@ public class PlayNodes {
         Input input = new Input();
         Output output = new Output();
         TextBuilder txtInput = new TextBuilder("Input:", 16);
-        TextBuilder txtOuput = new TextBuilder("Output:", 16);
+        TextBuilder txtOutput = new TextBuilder("Output:", 16);
         InputButton btnIn = new InputButton(this, input, output);
         HelpButton btnHelp = new HelpButton();
         RestartButton btnReturn = new RestartButton();
 
         //Root Children
-        root.add(board.getRoot(), 1, 0);
-        root.add(containerOffset, 2, 0);
-        root.setStyle("-fx-background-color: #C3DBC5;");
+        ROOT.add(BOARD.getRoot(), 1, 0);
+        ROOT.add(containerOffset, 2, 0);
+        ROOT.setStyle("-fx-background-color: #C3DBC5;");
 
         //containerOffset Children
         containerOffset.getChildren().addAll(container, control);
@@ -44,14 +44,14 @@ public class PlayNodes {
         container.setMinWidth(230);
 
         //componentsOffset Children
-        itemsOffset.getChildren().addAll(input.getTextArea(), txtInput.getText(), output.getTextArea(), txtOuput.getText(), btnIn.getButton());
-        setAnchor(txtInput.getText(), 0.0, 0.0);
+        itemsOffset.getChildren().addAll(input.getTextArea(), txtInput.getTEXT(), output.getTextArea(), txtOutput.getTEXT(), btnIn.getButton());
+        setAnchor(txtInput.getTEXT(), 0.0, 0.0);
         setAnchor(input.getTextArea(), 25.0, 0.0);
-        setAnchor(txtOuput.getText(), 95.0, 0.0);
+        setAnchor(txtOutput.getTEXT(), 95.0, 0.0);
         setAnchor(output.getTextArea(), 120.0, 0.0);
         setAnchor(btnIn.getButton(), 0,140.0);
 
-        //conrol Children
+        //control Children
         control.getChildren().addAll(controlOffset);
 
         //controlOffset Children
@@ -72,10 +72,10 @@ public class PlayNodes {
         AnchorPane.setLeftAnchor(node, left);
     }
 
-    public GridPane getRoot() {
-        return root;
+    public GridPane getROOT() {
+        return ROOT;
     }
-    public Board getBoard() {
-        return board;
+    public Board getBOARD() {
+        return BOARD;
     }
 }

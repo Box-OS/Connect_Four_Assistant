@@ -13,7 +13,7 @@ public class InputButton extends ButtonBuilder{
     BoardHandler b = new BoardHandler();
 
     public InputButton(PlayNodes ui, Input input, Output output) {
-        super("Enter", 75,20);
+        super("Enter", 65,20);
 
         EventHandler<ActionEvent> event = e -> {
 
@@ -25,11 +25,11 @@ public class InputButton extends ButtonBuilder{
                 */
 
             output.clearText();
-            ui.getBoard().unhighlightAll();
+            ui.getBOARD().unhighlightAll();
             int in = Integer.parseInt(input.getInputString());
             String currentColor = isYourTurn? "red":"blue";
             b.dump();   //debugging
-            ui.getBoard().insertCircle(currentColor, b.lowestRow(in-1), in);
+            ui.getBOARD().insertCircle(currentColor, b.lowestRow(in-1), in);
             b.dump();   //debugging
             b.placePiece(in-1, isYourTurn? 1:2);
             b.dump();   //debugging
@@ -43,7 +43,7 @@ public class InputButton extends ButtonBuilder{
             output.addText("The current best move is column " + nextMove);
 
             for (int i = 1; i<7; i++) {
-                ui.getBoard().highlightSlot(nextMove,i);
+                ui.getBOARD().highlightSlot(nextMove,i);
             }
 
             b.dump();   //debugging

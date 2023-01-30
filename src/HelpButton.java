@@ -13,7 +13,18 @@ public class HelpButton extends ButtonBuilder{
         super("Help",60,25);
         Alert alert;
         alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("*Insert accepted inputs*");
+        alert.setContentText(
+            "Inside input box, type the column number to insert a checker, then press enter.\n"
+                +"\n \n \n"+
+
+
+            "──▒▒▒▒▒▒───▄████▄\n" +
+            "─▒─▄▒─▄▒──███▄█▀\n" +
+            "─▒▒▒▒▒▒▒─▐████──█─█\n" +
+            "─▒▒▒▒▒▒▒──█████▄\n" +
+            "─▒─▒─▒─▒───▀████▀\n" +
+            "Tool by [-]"
+        );
 
         EventHandler<ActionEvent> helpPopup = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
