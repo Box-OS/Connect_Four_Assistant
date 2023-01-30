@@ -33,6 +33,14 @@ public class Board {
         slot[ROWS-(row)][col-1].highlight();
     }
 
+    public void unhighlightAll() {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                slot[row][col].unhighlight();
+            }
+        }
+    }
+
     public void insertCircle(String type, int row, int col) {
          slot[row][col-1].createCircle(type);
     }

@@ -38,6 +38,12 @@ public class Slot {
         );
     }
 
+    public void unhighlight() {
+        button.setStyle(
+                "all: revert"
+        );
+    }
+
 
     //Getters and Setters
     public Button getButton() {return button;}

@@ -25,7 +25,7 @@ public class InputButton extends ButtonBuilder{
                 */
 
             output.clearText();
-
+            ui.getBoard().unhighlightAll();
             int in = Integer.parseInt(input.getInputString());
             String currentColor = isYourTurn? "red":"blue";
             b.dump();   //debugging
@@ -41,12 +41,15 @@ public class InputButton extends ButtonBuilder{
             output.addText("It's " + currentColor + "'s turn now");
 
             output.addText("The current best move is column " + nextMove);
-            //for (int i = 1; i<7; i++) {
-            //    ui.getBoard().highlightSlot(nextMove,i);
-            //}
+
+            for (int i = 1; i<7; i++) {
+                ui.getBoard().highlightSlot(nextMove,i);
+            }
+
             b.dump();   //debugging
             input.clearText();
             isYourTurn = !isYourTurn;
+
 
 
         };

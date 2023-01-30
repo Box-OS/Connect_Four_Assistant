@@ -138,8 +138,8 @@ public class BoardHandler extends GravityHandler{
         return bestMove;
     }
 
-/*
-    private int findBestMove(int[][] board, int depth, boolean isMaximizing) {
+
+    private int findBestMoveRecur(int[][] board, int depth, boolean isMaximizing) {
         // Initialize best move as an invalid move
         int bestMove = -1;
         // Initialize best score based on player
@@ -148,9 +148,9 @@ public class BoardHandler extends GravityHandler{
         // Loop through all possible moves
         for (int i = 0; i < 7; i++) {
             // Check if the move is valid
-            if (g.isValidMove(board, i)) {
+            if (isValidMove(board, i)) {
                 // Make the move and get the new board state
-                int[][] newBoard = g.addPiece(board, i, isMaximizing ? USER : OPPONENT);
+                int[][] newBoard = addPiece(board, i, isMaximizing ? USER : OPPONENT);
                 // Recursively call minimax with the new board state, remaining depth, and opposite player
                 int score = minimax(newBoard, depth - 1, !isMaximizing);
                 // If the current player is the maximizing player, updates the best score and move if necessary
@@ -425,4 +425,15 @@ public class BoardHandler extends GravityHandler{
         return inRow;
     }
 
+    public static void main(String[] args) {
+        BoardHandler b = new BoardHandler();
+        int[][] board = {
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0}
+        };
+    }
 }
