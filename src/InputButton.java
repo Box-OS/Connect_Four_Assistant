@@ -17,12 +17,6 @@ public class InputButton extends ButtonBuilder{
 
         EventHandler<ActionEvent> event = e -> {
 
-                //TODO: Read comments (For Core Programmer)
-                /*
-                This is the part where input is managed according to the algo. For example when the user types
-                play c1 in input, insert circle method is called. As for showing the best move, call highlightSlot().
-                Here's a linear example of what that would look like without the implementation of the algorithm.
-                */
 
             output.clearText();
             ui.getBOARD().unhighlightAll();
