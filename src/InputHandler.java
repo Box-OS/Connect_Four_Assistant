@@ -12,6 +12,6 @@ public class InputHandler {
         this.columns = columns;
     }
     public boolean checkInRange(int userInput) {
-        return userInput >= 1 && userInput <=columns-1;
+        return userInput >= 1 && userInput <=columns;
     }
 }
