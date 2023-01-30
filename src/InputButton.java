@@ -10,41 +10,65 @@ import javafx.event.EventHandler;
 public class InputButton extends ButtonBuilder{
     boolean isYourTurn = true;
 
+    Board board = new Board();
     BoardHandler b = new BoardHandler();
+    InputHandler inputHandler = new InputHandler(board.getCOLS());
 
     public InputButton(PlayNodes ui, Input input, Output output) {
         super("Enter", 75,20);
 
         EventHandler<ActionEvent> event = e -> {
 
-
+            //clears output text box
             output.clearText();
+            //clears previous highlights
             ui.getBoard().unhighlightAll();
-            int in = Integer.parseInt(input.getInputString());
-            String currentColor = isYourTurn? "red":"blue";
-            b.dump();   //debugging
-            ui.getBoard().insertCircle(currentColor, b.lowestRow(in-1), in);
-            b.dump();   //debugging
-            b.placePiece(in-1, isYourTurn? 1:2);
-            b.dump();   //debugging
 
-            int nextMove = b.nextMove(isYourTurn?1:2) + 1;
+            if (!b.isWin(!isYourTurn)) {
+                int in = Integer.parseInt(input.getInputString());
+                //takes integer input from string input box
+                //checks if string is within valid columns
+                if(inputHandler.checkInRange(in)) {
+                    //determines current color playing based on isYourTurn
+                    String currentColor = isYourTurn ? "red" : "blue";
+                    b.dump();   //debugging
+                    try {
+                        //inserts circle based on turn color
+                        ui.getBoard().insertCircle(currentColor, b.lowestRow(in - 1), in);
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        System.err.println("column is full");
+                        isYourTurn = !isYourTurn;
+                    }
+                    b.dump();   //debugging
+                    //places the piece in back-end array
+                    b.placePiece(in - 1, isYourTurn ? 1 : 2);
+                    b.dump();   //debugging
 
-            output.addText(currentColor + " played in column " + in);
-            currentColor = !isYourTurn? "red":"blue";
-            output.addText("It's " + currentColor + "'s turn now");
+                    //determines next move from BoardHandler logic
+                    int nextMove = b.nextMove(isYourTurn ? 1 : 2) + 1;
 
-            output.addText("The current best move is column " + nextMove);
+                    //outputs text information based on current color playing and next best move
+                    output.addText(currentColor + " played in column " + in);
+                    currentColor = !isYourTurn ? "red" : "blue";
+                    output.addText("It's " + currentColor + "'s turn now");
 
-            for (int i = 1; i<7; i++) {
-                ui.getBoard().highlightSlot(nextMove,i);
+                    output.addText("The current best move is column " + nextMove);
+
+                    //highlights the best column to play in
+                    for (int i = 1; i < 7; i++) {
+                        ui.getBoard().highlightSlot(nextMove, i);
+                    }
+
+                    b.dump();   //debugging
+                    //clears input bar
+                    input.clearText();
+
+                    //advances turn
+                    isYourTurn = !isYourTurn;
+                }
+            } else {
+                output.addText(!isYourTurn ? "red" : "blue" + " has won the game");
             }
-
-            b.dump();   //debugging
-            input.clearText();
-            isYourTurn = !isYourTurn;
-
-
 
         };
 

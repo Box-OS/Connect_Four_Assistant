@@ -1,12 +1,17 @@
+/**
+ * The BoardHandler class runs the logic for finding the best move given a 2D array of a board.
+ *
+ * @author Leqi Shen
+ * @version 1.30.2023
+ */
 public class BoardHandler extends GravityHandler{
-
-    ;
 
     //int indicating the user's pieces
     private final int USER = 1;
     //int indicating the opponent's pieces
     private final int OPPONENT = 2;
 
+    //board for one piece color, red
     private int[][] player1Board = {
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
@@ -16,6 +21,7 @@ public class BoardHandler extends GravityHandler{
             {0,0,0,0,0,0,0}
     };
 
+    //board for one piece color, blue
     private int[][] player2Board = {
             {0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0},
@@ -36,7 +42,7 @@ public class BoardHandler extends GravityHandler{
 
     public int nextMove(int boardSelection) {
         int[][] tempBoard;
-        if (boardSelection == 2) {
+        if (boardSelection == OPPONENT) {
             tempBoard = player2Board;
         } else {
             tempBoard = player1Board;
@@ -44,58 +50,65 @@ public class BoardHandler extends GravityHandler{
         return findBestMove(tempBoard);
     }
 
+    public boolean isWin(boolean currentTurn) {
+        if(currentTurn) {
+            return checkForWin(player1Board);
+        }
+        return checkForWin(player2Board);
+    }
+
     public void dump() {
         for (int i = 0; i<7; i++) {
             System.out.print(player1Board[0][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player1Board[1][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player1Board[2][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player1Board[3][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player1Board[4][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player1Board[5][i]);
         }
-        System.out.println("");
-        System.out.println("");
+        System.out.println();
+        System.out.println();
 
         for (int i = 0; i<7; i++) {
             System.out.print(player2Board[0][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player2Board[1][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player2Board[2][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player2Board[3][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player2Board[4][i]);
         }
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i<7; i++) {
             System.out.print(player2Board[5][i]);
         }
-        System.out.println("");
-        System.out.println("");
+        System.out.println();
+        System.out.println();
     }
 
     /**
@@ -138,101 +151,6 @@ public class BoardHandler extends GravityHandler{
         return bestMove;
     }
 
-
-    private int findBestMoveRecur(int[][] board, int depth, boolean isMaximizing) {
-        // Initialize best move as an invalid move
-        int bestMove = -1;
-        // Initialize best score based on player
-        int bestScore = isMaximizing ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-
-        // Loop through all possible moves
-        for (int i = 0; i < 7; i++) {
-            // Check if the move is valid
-            if (isValidMove(board, i)) {
-                // Make the move and get the new board state
-                int[][] newBoard = addPiece(board, i, isMaximizing ? USER : OPPONENT);
-                // Recursively call minimax with the new board state, remaining depth, and opposite player
-                int score = minimax(newBoard, depth - 1, !isMaximizing);
-                // If the current player is the maximizing player, updates the best score and move if necessary
-                if (isMaximizing && score > bestScore) {
-                    bestScore = score;
-                    bestMove = i;
-                }
-                // If the current player is the minimizing player
-                else if (!isMaximizing && score < bestScore) {
-                    bestScore = score;
-                    bestMove = i;
-                }
-            }
-        }
-        return bestMove;
-    }
-
-
-
-    /**
-     * minimax
-     *
-     * @param board the board passed into the method
-     * @param depth indicates the maximum depth algorithm is to recurse
-     * @param isMaximizing determines which player we are helping
-     * @return an int representing the score of the position
-     */
-    private int minimax(int[][] board, int depth, boolean isMaximizing) {
-        // Check if the game is over by calling checkForWin()
-        if (checkForWin(board)) {
-            // If the current player is the maximizing player, return a score of 10 to indicate a win
-            if (isMaximizing) {
-                return 10000000;
-            }
-            // If the current player is the minimizing player, return a score of -10 to indicate a loss
-            else {
-                return -10000000;
-            }
-        }
-
-        // If the depth is 0 or the board is full, return the evaluation of the current board state
-        if (depth == 0) {
-            return evalBoard(board);
-        }
-
-        // If the current player is the maximizing player
-        int bestScore;
-        if (isMaximizing) {
-            // Initialize the best score to the lowest possible value
-            bestScore = Integer.MIN_VALUE;
-            // Loop through all possible moves
-            for (int i = 0; i < 7; i++) {
-                // Check if the move is valid
-                if (isValidMove(board, i)) {
-                    // Make the move and get the new board state
-                    int[][] newBoard = addPiece(board, i, USER);
-                    // Recursively call minimax with the new board state, remaining depth, and minimizing player
-                    int score = minimax(newBoard, depth - 1, false);
-                    // Update the best score if necessary
-                    bestScore = Math.max(score, bestScore);
-                }
-            }
-        }
-        // If the current player is the minimizing player
-        else {
-            // Initialize the best score to the highest possible value
-            bestScore = Integer.MAX_VALUE;
-            // Loop through all possible moves
-            for (int i = 0; i < 7; i++) {
-                // Check if the move is valid
-                if (isValidMove(board, i)) {
-                    // Make the move and get the new board state
-                    int[][] newBoard = addPiece(board, i, 2);
-                    // Recursively call minimax with the new board state, remaining depth, and maximizing player
-                    int score = minimax(newBoard, depth - 1, true);
-                    // Update the best score if necessary
-                    bestScore = Math.min(score, bestScore);
-                }
-            }
-        }
-        return bestScore;
-    }
     /**
      * checks if there are 4 same-player pieces in a row and gives a true-or-false return
      *
@@ -423,17 +341,5 @@ public class BoardHandler extends GravityHandler{
             }
         }
         return inRow;
-    }
-
-    public static void main(String[] args) {
-        BoardHandler b = new BoardHandler();
-        int[][] board = {
-                {0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0}
-        };
     }
 }
