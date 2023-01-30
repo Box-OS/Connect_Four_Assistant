@@ -1,6 +1,12 @@
+/**
+ *
+ *
+ * @author Leqi Shen
+ * @version 1.30.2023
+ */
 public class GravityHandler {
 
-    BoardArrayHandler copier = new BoardArrayHandler();
+    ArrayHandler copier = new ArrayHandler();
 
     public boolean isValidMove(int[][] board, int column) {
         return board[0][column] == 0;
@@ -22,7 +28,7 @@ public class GravityHandler {
     }
 
     public int findLowest(int[][] board, int column) {
-        int lowestSlot = 0;
+        int lowestSlot = -1;
         for (int i = 5; i>=0; i--) {
             if (board[i][column] == 0) {
                 lowestSlot = i;

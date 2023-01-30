@@ -10,11 +10,11 @@ import javafx.scene.layout.HBox;
  */
 public class PlayNodes {
     private final GridPane ROOT;
-    private final Board BOARD;
+    private final Board board;
 
     public PlayNodes() {
         ROOT = new GridPane();
-        BOARD = new Board();
+        board = new Board();
         AnchorPane containerOffset = new AnchorPane();
         HBox container = new HBox();
         AnchorPane itemsOffset = new AnchorPane();
@@ -30,7 +30,7 @@ public class PlayNodes {
         RestartButton btnReturn = new RestartButton();
 
         //Root Children
-        ROOT.add(BOARD.getRoot(), 1, 0);
+        ROOT.add(board.getRoot(), 1, 0);
         ROOT.add(containerOffset, 2, 0);
         ROOT.setStyle("-fx-background-color: #C3DBC5;");
 
@@ -75,7 +75,7 @@ public class PlayNodes {
     public GridPane getROOT() {
         return ROOT;
     }
-    public Board getBOARD() {
-        return BOARD;
+    public Board getBoard() {
+        return board;
     }
 }

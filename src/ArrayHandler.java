@@ -1,6 +1,12 @@
 import java.util.Arrays;
 
-public class BoardArrayHandler {
+/**
+ *
+ *
+ * @author Leqi Shen
+ * @version 1.30.2023
+ */
+public class ArrayHandler {
     public int[][] deepCopy(int[][] original) {
         if (original == null) {
             return null;
