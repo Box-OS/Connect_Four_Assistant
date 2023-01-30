@@ -28,6 +28,7 @@ public class Main extends Application {
                 startGame();
 
             }
+
         }
 
 

@@ -12,7 +12,7 @@ public class InputButton extends ButtonBuilder{
 
     BoardHandler b = new BoardHandler();
 
-    public InputButton(UI ui, Input input, Output output) {
+    public InputButton(PlayNodes ui, Input input, Output output) {
         super("Enter", 75,20);
 
         EventHandler<ActionEvent> event = e -> {
