@@ -30,6 +30,7 @@ public class InputButton extends ButtonBuilder{
                     in = Integer.parseInt(input.getInputString());
                 } catch (Exception exception) {
                     output.addText ("Please input one integer between 1-7 in the box");
+                    input.clearText();
                 }
 
 
@@ -72,6 +73,8 @@ public class InputButton extends ButtonBuilder{
 
                     //advances turn
                     isYourTurn = !isYourTurn;
+                } else {
+                    input.clearText();
                 }
             } else {
                 //does nothing and gives winning text
