@@ -1,5 +1,6 @@
 /**
  * The BoardHandler class runs the logic for finding the best move given a 2D array of a board.
+ * The class keeps track of 2 2D arrays for 2 boards, one for each perspective of each player, as the logic sees 1 as the friendly pieces and 2 as the enemy pieces.
  *
  * @author Leqi Shen
  * @version 1.30.2023
@@ -31,15 +32,33 @@ public class BoardHandler extends GravityHandler{
             {0,0,0,0,0,0,0}
     };
 
+    /**
+     * Looks for the lowest row available in a specified column for placing a piece into.
+     *
+     * @param column the user-defined column to look into
+     * @return an int indicating the lowest unoccupied row
+     */
     public int lowestRow(int column) {
         return findLowest(player1Board, column);
     }
 
+    /**
+     * Adds a piece into the lowest position on both boards with opposite integer tags so algorithm can aid both sides
+     *
+     * @param column the user-defined column to place a piece into
+     * @param player the player to place a piece for
+     */
     public void placePiece(int column, int player) {
         player1Board = addPiece(player1Board, column, player);
-        player2Board = addPiece(player2Board, column, player==1?2:1);
+        player2Board = addPiece(player2Board, column, player==1?2:1);       //pl
     }
 
+    /**
+     * analyzes a board through method findBestMove and returns its output, which is the best move for that current board position
+     *
+     * @param boardSelection int selection for either player 1 or 2's board
+     * @return The best move given the board
+     */
     public int nextMove(int boardSelection) {
         int[][] tempBoard;
         if (boardSelection == OPPONENT) {
@@ -50,6 +69,12 @@ public class BoardHandler extends GravityHandler{
         return findBestMove(tempBoard);
     }
 
+    /**
+     * checks the given board whether there is a winning set of 4 pieces or not using the checkForWin method
+     *
+     * @param currentTurn Boolean true/false for indicating player 1/2's turn
+     * @return true if there is a consecutive set of 4 1's indicating a win for that player
+     */
     public boolean isWin(boolean currentTurn) {
         if(currentTurn) {
             return checkForWin(player1Board);
@@ -57,55 +82,26 @@ public class BoardHandler extends GravityHandler{
         return checkForWin(player2Board);
     }
 
+    /**
+     * debugging method for dumping both boards and seeing if back-end is entering pieces into the right positions
+     */
     public void dump() {
-        for (int i = 0; i<7; i++) {
-            System.out.print(player1Board[0][i]);
+        //prints the first board through looping
+        for (int j = 0; j<6; j++) {
+            for (int i = 0; i<7; i++) {
+                System.out.print(player1Board[j][i]);
+            }
+            System.out.println();
         }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player1Board[1][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player1Board[2][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player1Board[3][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player1Board[4][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player1Board[5][i]);
-        }
+        //double line indent for formatting
         System.out.println();
         System.out.println();
-
-        for (int i = 0; i<7; i++) {
-            System.out.print(player2Board[0][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player2Board[1][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player2Board[2][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player2Board[3][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player2Board[4][i]);
-        }
-        System.out.println();
-        for (int i = 0; i<7; i++) {
-            System.out.print(player2Board[5][i]);
+        //prints the second board
+        for (int j = 0; j<6; j++) {
+            for (int i = 0; i<7; i++) {
+                System.out.print(player2Board[j][i]);
+            }
+            System.out.println();
         }
         System.out.println();
         System.out.println();
@@ -269,6 +265,7 @@ public class BoardHandler extends GravityHandler{
         int userCount;
         int opponentCount;
 
+        //counts the pieces in the given set
         userCount = pieceCounter(line, USER);
         opponentCount = pieceCounter(line, OPPONENT);
 
@@ -283,7 +280,7 @@ public class BoardHandler extends GravityHandler{
             lineRating +=5;
         }
 
-        // check if user has a line with 3 pieces and a filled spot
+        // check if user has a row of pieces but also has an opponent piece next to it
         else if (userCount == 3 && opponentCount == 1) {
             lineRating += 50;
         } else if (userCount == 2 && opponentCount == 1) {
@@ -301,13 +298,13 @@ public class BoardHandler extends GravityHandler{
             lineRating -=5;
         }
 
-        // check if opponent has a line with 3 pieces and a filled spot
+        // check if opponent has a row of pieces but also has an user piece next to it
         else if (opponentCount == 3 && userCount == 1) {
             lineRating -= 50;
         } else if (opponentCount == 2 && userCount == 1) {
             lineRating -= 25;
         }
-        // if a line consists of 2 user spots and 2 opponent spots, the ranking is neutral, 0.
+        // if a line consists of the same amount of user/opponent spots, the ranking is neutral, 0.
 
         return lineRating;
     }

@@ -66,6 +66,7 @@ public class InputButton extends ButtonBuilder{
                     isYourTurn = !isYourTurn;
                 }
             } else {
+                //does nothing and gives winning text
                 output.addText(!isYourTurn ? "red" : "blue" + " has won the game");
             }
 
