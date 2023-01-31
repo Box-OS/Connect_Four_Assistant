@@ -87,7 +87,7 @@ public class BoardHandler extends GravityHandler{
      */
     public void dump() {
         //prints the first board through looping
-        for (int j = 0; j<6; j++) {
+        for (int j = 0; j< player1Board.length; j++) {
             for (int i = 0; i<7; i++) {
                 System.out.print(player1Board[j][i]);
             }
@@ -97,7 +97,7 @@ public class BoardHandler extends GravityHandler{
         System.out.println();
         System.out.println();
         //prints the second board
-        for (int j = 0; j<6; j++) {
+        for (int j = 0; j< player2Board.length; j++) {
             for (int i = 0; i<7; i++) {
                 System.out.print(player2Board[j][i]);
             }
@@ -114,7 +114,6 @@ public class BoardHandler extends GravityHandler{
      * @return the column for the best move
      */
     private int findBestMove(int[][] board) {
-
 
         // Initialize best move as an invalid move
         int bestMove = -1;
@@ -298,7 +297,7 @@ public class BoardHandler extends GravityHandler{
             lineRating -=5;
         }
 
-        // check if opponent has a row of pieces but also has an user piece next to it
+        // check if opponent has a row of pieces but also has a user piece next to it
         else if (opponentCount == 3 && userCount == 1) {
             lineRating -= 50;
         } else if (opponentCount == 2 && userCount == 1) {
