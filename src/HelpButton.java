@@ -4,7 +4,7 @@ import javafx.scene.control.Alert;
 
 /** HelpButton.java
  *  Extends ButtonBuilder.java
- *  Creates a button that upon click, shows a pop-up showing accepted inputs
+ *  Creates a button that upon click, shows a dialog that explains expected inputs
  *
  *   @author Sina Akhavan
  */
@@ -14,7 +14,7 @@ public class HelpButton extends ButtonBuilder{
         Alert alert;
         alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(
-            "Inside input box, type the column number(1-7) to insert a checker, then press enter.\n"
+            "Inside input box, type the column number (1-7) to insert a checker, then press enter.\n"
                 +"\n \n \n"+
 
 
@@ -26,13 +26,7 @@ public class HelpButton extends ButtonBuilder{
             "-Tool developed by [team name]"
         );
 
-        EventHandler<ActionEvent> helpPopup = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
-               alert.show();
-            }
-
-        };
+        EventHandler<ActionEvent> helpPopup = e -> alert.show();
         button.setOnAction(helpPopup);
     }
 }

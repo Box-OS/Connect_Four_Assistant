@@ -11,5 +11,7 @@ public abstract class SceneBuilder {
     public SceneBuilder(Parent root) {
         scene = new Scene(root);
     }
+
+    //Getters and Setters
     public Scene getScene() {return scene;}
 }

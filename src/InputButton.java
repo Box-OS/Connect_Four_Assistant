@@ -5,17 +5,15 @@ import javafx.event.EventHandler;
  *  Extends ButtonBuilder.java
  *  Creates a button that manages Input.java
  *
- *   @author Sina Akhavan
+ *   @author Sina Akhavan & Leqi Shen
  */
 public class InputButton extends ButtonBuilder{
     boolean isYourTurn = true;
-
-
     BoardHandler b = new BoardHandler();
     InputHandler inputHandler;
 
     public InputButton(PlayNodes ui, Input input, Output output) {
-        super("Enter", 75,20);
+        super("Enter", 65,20);
         inputHandler = new InputHandler(ui.getBoard().getCOLS());
 
         EventHandler<ActionEvent> event = e -> {

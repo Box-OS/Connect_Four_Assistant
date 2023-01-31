@@ -9,8 +9,6 @@ import javafx.scene.text.Text;
 public class TextBuilder {
     private final Text TEXT;
 
-
-
     public TextBuilder(String t, int size, String font) {
         TEXT = new Text();
         TEXT.setText(t);
@@ -24,5 +22,6 @@ public class TextBuilder {
         this(t, size, "SF Pro");
     }
 
+    //Getters and Setters
     public Text getTEXT() {return TEXT;}
 }

@@ -10,6 +10,10 @@ public class Input extends TextAreaBuilder{
         textArea.setWrapText(true);
     }
 
+    /**
+     * gets the text inside input box
+     * @return entered text inside Input to String
+     */
     public String getInputString() {
         return textArea.getText();
     }

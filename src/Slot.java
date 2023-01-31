@@ -1,36 +1,40 @@
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 
-/** Circle.java
- *  creates a slot capable of containing a circle
+/** Slot.java
+ *  creates a slot that can have a checker inside
  *
  *   @author Sina Akhavan
  */
 public class Slot {
-    //Attributes
-    final private int WIDTH = 50;
-    final private int HEIGHT = 50;
-    private Button button;
+    private final int WIDTH = 50;
+    private final int HEIGHT = 50;
+    private final Button BUTTON;
     private Circle circle;
 
-    //Constructor
     public Slot() {
-        button = new Button();
-        button.setMinSize(WIDTH, HEIGHT);
-        button.setMaxSize(WIDTH, HEIGHT);
-        button.setPadding(new Insets(0));
-        button.setDisable(true);
-        button.setOpacity(1);
+        BUTTON = new Button();
+        BUTTON.setMinSize(WIDTH, HEIGHT);
+        BUTTON.setMaxSize(WIDTH, HEIGHT);
+        BUTTON.setPadding(new Insets(0));
+        BUTTON.setDisable(true);
+        BUTTON.setOpacity(1);
     }
 
-    //Methods
+    /**
+     * changes the slot graphic to have a checker inside
+     * @param type the type of circle (red or blue)
+     */
     public void createCircle(String type){
         circle = new Circle(type);
-        button.setGraphic(circle.getImg());
+        BUTTON.setGraphic(circle.getImg());
     }
 
+    /**
+     * highlights slot by changing its style through css
+     */
     public void highlight() {
-        button.setStyle(
+        BUTTON.setStyle(
                "-fx-outline:none;" +
                "-fx-border-color:#9ecaed;" +
                "-fx-box-shadow: inset 0 0 500px 500px #9ecaed;" +
@@ -38,15 +42,18 @@ public class Slot {
         );
     }
 
+    /**
+     * reverts css effects of slot
+     */
     public void unhighlight() {
-        button.setStyle(
+        BUTTON.setStyle(
                 "all: revert"
         );
     }
 
 
     //Getters and Setters
-    public Button getButton() {return button;}
+    public Button getBUTTON() {return BUTTON;}
     public int getWIDTH() {
         return WIDTH;
     }

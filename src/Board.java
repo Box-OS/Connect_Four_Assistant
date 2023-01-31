@@ -6,33 +6,42 @@ import javafx.scene.layout.GridPane;
  *   @author Sina Akhavan
  */
 public class Board {
-    //Attributes
     final private int ROWS = 6;
     final private int COLS = 7;
     private GridPane root;
     final private Slot[][] slot;
 
-    //Constructor
     public Board(){
         slot = new Slot[ROWS][COLS];
         createGrid();
     }
 
-    //Methods
+
+    /**
+     *  Creates grid the size of (ROWS x COLS)
+     */
     private void createGrid(){
         root = new GridPane();
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
                 slot[row][col] = new Slot();
-                root.add(slot[row][col].getButton(), col, row);
+                root.add(slot[row][col].getBUTTON(), col, row);
             }
         }
     }
 
+    /**
+     *  highlights the selected slot
+     * @param col x position (1-7)
+     * @param row y position (1-6)
+     */
     public void highlightSlot(int col, int row) {
         slot[ROWS-(row)][col-1].highlight();
     }
 
+    /**
+     * Reverts the highlight effect across all slots
+     */
     public void unhighlightAll() {
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
@@ -41,6 +50,12 @@ public class Board {
         }
     }
 
+    /**
+     * inserts a circle inside the selected slot
+     * @param type type of circle (red or blue)
+     * @param col x position (1-7)
+     * @param row y position (1-6)
+     */
     public void insertCircle(String type, int row, int col) {
          slot[row][col-1].createCircle(type);
     }

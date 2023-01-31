@@ -1,8 +1,8 @@
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-/** StartMenu.java
- *  Extends SceneBuilder. Initial scene when running stage.
+/** MenuScene.java
+ *  Extends SceneBuilder. The initial scene when running stage.
  *
  *   @author Sina Akhavan
  */

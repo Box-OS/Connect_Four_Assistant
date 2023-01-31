@@ -13,10 +13,15 @@ public abstract class TextAreaBuilder {
         textArea.setPrefColumnCount(length);
     }
 
-    public TextArea getTextArea() {
-        return textArea;
-    }
+    /**
+     * clears the contents inside textArea
+     */
     public void clearText() {
         textArea.clear();
+    }
+
+    //Getters and Setters
+    public TextArea getTextArea() {
+        return textArea;
     }
 }

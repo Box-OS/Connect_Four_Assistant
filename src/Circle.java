@@ -2,44 +2,36 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /** Circle.java
- *  creates the playing tokens for player1 (red) and player2 (blue)
+ *  creates the checkers for player1 (red) and player2 (blue)
  *
  *   @author Sina Akhavan
  */
 public class Circle {
-    //Attributes
-    private int height, width;
-    private String type;
+    private final int HEIGHT, WIDTH;
+    private final String TYPE;
     private ImageView img;
     Image redCircle = new Image("red-circle.png");
     Image blueCircle = new Image("blue-circle.png");
 
-    //Constructor
-    public Circle(String type) {
-        this.type = type;
-        height = 45;
-        width = 45;
+    public Circle(String TYPE) {
+        this.TYPE = TYPE;
+        HEIGHT = 45;
+        WIDTH = 45;
         draw();
     }
 
-    public Circle(String type, int size) {
-        this.type = type;
-        height = size;
-        width = size;
-        draw();
-    }
-
-    //Methods
+    /**
+     * draws the circle image
+     */
     private void draw() {
         img = new ImageView();
-        img.setPickOnBounds(true);
-        if (type.equals("red")) {
+        if (TYPE.equals("red")) {
             img.setImage(redCircle);
-        } else if (type.equals("blue")) {
+        } else if (TYPE.equals("blue")) {
             img.setImage(blueCircle);
         }
-            img.setFitHeight(height);
-            img.setFitWidth(width);
+            img.setFitHeight(HEIGHT);
+            img.setFitWidth(WIDTH);
     }
 
     //Getters and Setters

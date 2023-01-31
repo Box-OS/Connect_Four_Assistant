@@ -4,7 +4,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 /** PlayNodes.java
- *  Makes the main UI
+ *  Contains the GUI nodes for the main interface
  *
  *   @author Sina Akhavan
  */
@@ -72,6 +72,7 @@ public class PlayNodes {
         AnchorPane.setLeftAnchor(node, left);
     }
 
+    //Getters and Setters
     public GridPane getROOT() {
         return ROOT;
     }

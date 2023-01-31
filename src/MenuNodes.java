@@ -1,6 +1,11 @@
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+/** MenuNodes.java
+ *  Contains the GUI nodes for the starting menu
+ *
+ *  @author Sina Akhavan
+ */
 public class MenuNodes {
     private final AnchorPane ROOT;
 
@@ -21,6 +26,7 @@ public class MenuNodes {
 
     }
 
+    //Getters and Setters
     public AnchorPane getROOT() {
         return ROOT;
     }
