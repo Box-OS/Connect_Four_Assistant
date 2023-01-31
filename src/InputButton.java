@@ -8,7 +8,7 @@ import javafx.event.EventHandler;
  *   @author Sina Akhavan & Leqi Shen
  */
 public class InputButton extends ButtonBuilder{
-    boolean isYourTurn = true;
+    private boolean isYourTurn = true;
     BoardHandler b = new BoardHandler();
     InputHandler inputHandler;
 
