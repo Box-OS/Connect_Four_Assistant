@@ -22,19 +22,25 @@ public class GravityHandler {
     }
 
     /**
-     * Creates a deep copy of a board passed in and adds a piece in the lowest position in a specified column.
+     * Creates a deep copy of a board passed in and adds a disc in the lowest position in a specified column.
      *
-     * @param board the board to add a piece to
-     * @param column The specified column to add a piece to
-     * @param player the int indicator for which player to add a piece for
+     * @param board the board to add a disc to
+     * @param column The specified column to add a disc to
+     * @param player the int indicator for which player to add a disc for
      * @return a new 2D array, without a pointer to the previous one so that the parameter variable is not modified.
      */
     public int[][] addPiece(int[][] board, int column, int player) {
         //creates a deep copy of the array to make sure pointers are different
         int[][] newBoard = copier.deepCopy(board);
 
-        //uses output from findLowest to place a piece in the correct height and the specified column.
-        newBoard[findLowest(newBoard, column)][column] = player;
+        //uses output from findLowest to place a disc in the correct height and the specified column.
+       // edited by Betty
+        try {
+            newBoard[findLowest(newBoard, column)][column] = player;
+        } catch (Exception e) {
+
+        }
+
         return newBoard;
     }
 

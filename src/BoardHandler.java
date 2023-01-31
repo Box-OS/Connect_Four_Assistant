@@ -113,7 +113,7 @@ public class BoardHandler extends GravityHandler{
      * @param board the game board being passed in
      * @return the column for the best move
      */
-    private int findBestMove(int[][] board) {
+    int findBestMove(int[][] board) {
 
         // Initialize best move as an invalid move
         int bestMove = -1;
@@ -152,7 +152,7 @@ public class BoardHandler extends GravityHandler{
      * @param board the game board in a 2D array
      * @return true if 4 pieces are in a row in any orientation
      */
-    private boolean checkForWin(int[][] board) {
+    boolean checkForWin(int[][] board) {
         // check for horizontal win
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 4; j++) {
@@ -202,7 +202,7 @@ public class BoardHandler extends GravityHandler{
      * @param board the game board in a 2D array
      * @return a total board score based on rateLine's output of each set of 4 adjacent spots
      */
-    private int evalBoard(int[][] board) {
+    int evalBoard(int[][] board) {
         int boardScore = 0;
         // check for horizontal lines
         for (int i = 0; i < 6; i++) {
@@ -252,7 +252,7 @@ public class BoardHandler extends GravityHandler{
      * @param d fourth piece in row
      * @return a score based on amount of user and opponent pieces in a row
      */
-    private int rateLine(int a, int b, int c, int d) {
+    int rateLine(int a, int b, int c, int d) {
 
         //puts input values into an array
         int[] line = new int[] {a, b, c, d};
@@ -315,7 +315,7 @@ public class BoardHandler extends GravityHandler{
      * @param player indicates if method should check for player 1 (user) or player 2 (opponent)'s pieces
      * @return the amount of pieces that are in a row
      */
-    private int pieceCounter(int[] line, int player) {
+    int pieceCounter(int[] line, int player) {
         // Initialize the number of pieces in a row as 0
         int inRow = 0;
         for (int j = 0; j < line.length; j++) {

@@ -23,8 +23,16 @@ public class InputButton extends ButtonBuilder{
             //clears previous highlights
             ui.getBoard().unhighlightAll();
 
+            // edited  by Betty
             if (!b.isWin(!isYourTurn)) {
-                int in = Integer.parseInt(input.getInputString());
+                int in = -1;
+                try {
+                    in = Integer.parseInt(input.getInputString());
+                } catch (Exception exception) {
+                    output.addText ("Please input one integer between 1-7 in the box");
+                }
+
+
                 //takes integer input from string input box
                 //checks if string is within valid columns
                 if(inputHandler.checkInRange(in)) {
